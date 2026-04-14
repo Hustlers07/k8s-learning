@@ -27,4 +27,12 @@ server:
     servlet:
       context-path: /demo
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+#  endpoint:
+#    health:
+#      show-details: always
 
