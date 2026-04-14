@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://192.168.49.2:30001/demo?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: demo
+    password: demo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+      minimum-idle: 2
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+server:
+    port: 8082
+
+
