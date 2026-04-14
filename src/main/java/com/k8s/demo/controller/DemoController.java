@@ -17,11 +17,6 @@ public class DemoController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/health")
-    public String helloWorld() {
-        return ResponseEntity.ok().body("Hello World").getBody();
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<User>> hello() {
         return ResponseEntity.ok(userService.getAllUsers());

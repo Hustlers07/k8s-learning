@@ -3,8 +3,17 @@
 # Switch Docker to use Minikube's environment
 eval $(minikube docker-env)
 
-# Build the Spring Boot Docker image
-echo "Building Docker image spring-demo:latest..."
+# Run Maven clean install to build the JAR
+echo "Running Maven clean install..."
+mvn clean install -DskipTests
+
+# Delete old Docker image if it exists
+#echo "Deleting old Docker image spring-demo:latest (if present)..."
+#docker rmi -f spring-demo:latest || true
+
+# Build the Spring Boot Docker image without using cache
+echo "Building new Docker image spring-demo:latest (no cache)..."
+#docker build --no-cache -t spring-demo:latest .
 docker build -t spring-demo:latest .
 
 # Deleting existing deployment if it exists
@@ -21,4 +30,4 @@ echo "Done! Your Spring Boot app should now be deployed to Minikube."
 echo "Checking pods"
 kubectl get pods
 
-#kubectl exec -it spring-demo-6665c8749d-4t96r -- curl http://localhost:8082/demo/actuator/health
+#kubectl exec -it spring-demo-654c766db8-hzd8f -- curl http://localhost:8080/demo/actuator/health

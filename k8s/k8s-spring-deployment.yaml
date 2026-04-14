@@ -18,17 +18,17 @@ spec:
         image: spring-demo:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
         livenessProbe:
           httpGet:
             path: /demo/actuator/health
-            port: 8082
-          initialDelaySeconds: 60
+            port: 8080
+          initialDelaySeconds: 30
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /demo/actuator/health
-            port: 8082
+            port: 8080
           initialDelaySeconds: 20
           periodSeconds: 500
 ---
@@ -41,7 +41,7 @@ spec:
     app: spring-demo
   ports:
   - protocol: TCP
-    port: 8082
-    targetPort: 8082
+    port: 8080
+    targetPort: 8080
     nodePort: 30003
   type: NodePort
