@@ -16,11 +16,14 @@ fi
 
 echo "Deploying Spring Boot app with image version: $IMAGE_VERSION"
 
-# Apply the Kubernetes deployment with the given image version
+# Apply the Kubernetes manifest first (ensures deployment exists)
+kubectl apply -f ./k8s/k8s-spring-deployment.yaml
+
+# Update the image version in the deployment
 kubectl set image deployment/spring-demo spring-demo=hellisback/k8s-demo-app:${IMAGE_VERSION} --record
 
-# If the deployment doesn't exist yet, apply the manifest first
-kubectl apply -f ./k8s/k8s-spring-deployment.yaml
+# Wait for rollout to complete
+kubectl rollout status deployment/spring-demo
 
 echo "Done! Your Spring Boot app should now be deployed to Minikube."
 
