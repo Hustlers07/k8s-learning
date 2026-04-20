@@ -83,6 +83,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>k8s-demo-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>io.github.deweyjose</groupId>
@@ -173,6 +174,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<finalName>k8s-demo-app</finalName>
+	
 
 </project>
