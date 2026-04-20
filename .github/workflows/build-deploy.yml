@@ -46,12 +46,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      # Build Docker image with cache
+      # Build Docker image with numeric version
       - name: Build Docker image
         run: |
+          IMAGE_VERSION=v${{ github.run_number }}
+          echo "Building image version: $IMAGE_VERSION"
           docker buildx build \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max \
+            -t ${{ secrets.DOCKER_USERNAME }}/k8s-demo-app:${IMAGE_VERSION} \
             -t ${{ secrets.DOCKER_USERNAME }}/k8s-demo-app:latest \
             --push .
 
