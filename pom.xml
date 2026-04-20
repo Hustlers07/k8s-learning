@@ -173,5 +173,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	<finalName>k8s-demo-app</finalName>
 
 </project>

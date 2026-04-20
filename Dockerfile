@@ -5,7 +5,7 @@ FROM eclipse-temurin:17
 WORKDIR /app
 
 # Copy the jar file into the container
-COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
+COPY target/k8s-demo-app.jar app.jar
 
 # Run the jar
 ENTRYPOINT ["java","-jar","app.jar"]

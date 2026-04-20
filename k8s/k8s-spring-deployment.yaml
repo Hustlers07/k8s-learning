@@ -4,7 +4,6 @@ metadata:
   name: spring-demo
 spec:
   replicas: 1
-  replicas: 1
   selector:
     matchLabels:
       app: spring-demo

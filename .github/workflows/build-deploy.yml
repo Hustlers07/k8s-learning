@@ -1,0 +1,42 @@
+name: Build and Deploy Spring App
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up JDK for Spring Boot compilation
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Build Spring Boot app with Maven
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # Log in to Docker Hub using token
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      # Build Docker image
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-app:latest .
+
+      # Push Docker image
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:latest
