@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-demo
-        image: hellisback/k8s-demo-app:latest
+        image: hellisback/k8s-demo-app:${IMAGE_VERSION}
         ports:
         - containerPort: 8080
         env:
